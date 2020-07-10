@@ -77,10 +77,12 @@ void YSLoginViewController::bind()
         .subscribe([=](bool b) { loginView->ui->pushButton->setEnabled(b); });
 
 
-    from_signal(loginView->ui->pushButton, &QPushButton::clicked).throttled(std::chrono::seconds(1)).subscribe([=](const auto &) {
-//        loginViewModel->login();
-        qDebug() << "点击登录";
-    });
+    from_signal(loginView->ui->pushButton, &QPushButton::clicked)
+        .throttled(std::chrono::seconds(1))
+        .subscribe([=](const auto &) {
+            loginViewModel->login();
+            qDebug() << "点击登录";
+        });
 }
 
 
